@@ -1,12 +1,13 @@
 --[[Description: Makes your telementer functional.
 
-    Directions: 1. Put in system > start(). it would probably work with update() and flush() as well.
-                2. Place telemeter underneath the ship.
-                3. Link a landing gear and either name slot to gear_1 or ajdust gear_1 in the code
+    Directions: 1. Place telemeter underneath the ship.
+                2. Link a landing gear and either name slot to gear_1 or ajdust gear_1 in the code
                    to match whatever you name it.
-                4. Link to telemeter and name slot telemeter or adjust code to match whatever you name it.]]
+                3. Link to telemeter and name slot telemeter or adjust code to match whatever you name it.]]
                 
 --[[TODO: install a second telemeter and make it show information when about to collide with an object while traveling in a longitudinal direction. Give it a flashing red background when proximity to obstacle is too close when landing gear is raised.]]
+
+--Place in system>start()
 
 --Makes information visible.
 dist = telemeter.getDistance()
@@ -57,3 +58,15 @@ function updateDisplay()
     
     system.setScreen(content)
 end
+
+--Paste in system stop()
+system.showScreen(0)
+
+--Paste in unit tick(updateDisplay)
+unit.setTimer("updateDisplay", .1)
+
+--Paste in unit start()
+updateDisplay()
+
+--Paste in unit stop()
+unit.stopTimer("updateDisplay")
